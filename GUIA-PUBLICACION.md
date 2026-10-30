@@ -60,3 +60,9 @@ Oscuro de inicio, selector claro/oscuro con elección persistente. Firma fija �
 ## Archivos
 
 `files.json` enumera los archivos necesarios para la exportación del editor. Incluye copias de los archivos de configuración y de la guía, porque algunos alojamientos no sirven esos archivos por HTTP. Si los modificás manualmente, sincronizá también sus copias en `files.json`; si agregás archivos al proyecto, agregalos a la lista `files`. La biblioteca JSZip se incluye localmente y conserva su licencia en su encabezado (MIT/GPL dual).
+
+## Movimiento y fotos de portada
+
+La portada alterna tres fotografías locales de las embarcaciones cada 7,5 segundos con transición de 1,8 segundos. Los controles permiten avanzar, retroceder y pausar. El cambio se suspende cuando la portada está fuera de pantalla o la pestaña no está visible. Con la preferencia de movimiento reducido del dispositivo, se desactiva el cambio automático y se conservan los controles manuales.
+
+Los bloques de contenido aparecen y se desvanecen según su posición al desplazarse, en ambos sentidos. Los formularios conservan su visibilidad mientras tienen el foco. La preferencia de movimiento reducido desactiva estos efectos. La cabecera fija usa un degradado transparente y la firma inferior conserva espacio reservado y área segura móvil.

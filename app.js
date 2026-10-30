@@ -21,10 +21,46 @@ if($('#quote-form'))$('#quote-form').addEventListener('submit',e=>{e.preventDefa
 // Motion is an enhancement: all content stays visible without JavaScript.
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 if('IntersectionObserver' in window){
-  const reveal=new IntersectionObserver(entries=>{entries.forEach(({isIntersecting,target})=>{if(!isIntersecting)return;reveal.unobserve(target);if(!reducedMotion.matches&&target.animate)target.animate([{opacity:0,transform:'translateY(22px)'},{opacity:1,transform:'translateY(0)'}],{duration:650,delay:Number(target.dataset.revealDelay||0),easing:'cubic-bezier(.2,.65,.3,1)',fill:'backwards'})})},{threshold:.08});
-  document.querySelectorAll('.section-heading,.about>div,.coverage>div,.ports,.contact>div,.contact form,.vessel,.gallery-item').forEach((el,i)=>{if(el.matches('.vessel,.gallery-item'))el.dataset.revealDelay=String((i%3)*70);reveal.observe(el)});
   const navLinks=[...document.querySelectorAll('#nav a')];
   if(navLinks.length){const activeSection=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;navLinks.forEach(link=>{const active=link.hash==='#'+entry.target.id;link.classList.toggle('active',active);if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')})})},{rootMargin:'-15% 0px -55% 0px',threshold:0});document.querySelectorAll('main>section[id]').forEach(section=>activeSection.observe(section))}
 }
 document.querySelectorAll('.service-list details').forEach(detail=>detail.addEventListener('toggle',()=>{if(detail.open&&!reducedMotion.matches&&detail.animate)detail.querySelector('.service-body').animate([{opacity:0,transform:'translateY(-6px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,easing:'ease-out'})}));
 const header=$('.header');if(header){let scrollQueued=false;const updateHeader=()=>{header.classList.toggle('is-scrolled',scrollY>20);scrollQueued=false};addEventListener('scroll',()=>{if(!scrollQueued){requestAnimationFrame(updateHeader);scrollQueued=true}},{passive:true});updateHeader()}
+
+// A reversible, scroll-linked fade. No content is hidden without JavaScript.
+const sceneSelector='.hero-content>*,.section-heading>div,.section-heading>p,.about>div:first-child,.about-copy>p,.about-copy>.values,.about-copy>.text-link,.service-list>details,.vessel,.coverage>div>*,.ports>li,.gallery-item,.contact>div>*,.contact>form';
+const scenes=new Map();let motionFrame=0;
+const clamp01=value=>Math.min(1,Math.max(0,value));
+const smooth=value=>value*value*(3-2*value);
+function collectScenes(){document.querySelectorAll(sceneSelector).forEach(el=>{if(!scenes.has(el)){el.classList.add('scroll-scene');scenes.set(el,{y:0})}});queueMotion()}
+function queueMotion(){if(!motionFrame)motionFrame=requestAnimationFrame(paintMotion)}
+function paintMotion(){
+  motionFrame=0;
+  const viewHeight=innerHeight,top=(header?.offsetHeight||0)+12,bottom=viewHeight-46;
+  const entryDistance=Math.min(245,Math.max(130,viewHeight*.28));
+  const exitDistance=Math.min(170,Math.max(95,viewHeight*.19));
+  const updates=[];
+  scenes.forEach((state,el)=>{
+    if(!el.isConnected){scenes.delete(el);return}
+    if(reducedMotion.matches){updates.push({el,state,y:0,opacity:1});return}
+    const rect=el.getBoundingClientRect(),naturalTop=rect.top-state.y,naturalBottom=rect.bottom-state.y;
+    const entering=smooth(clamp01((bottom-naturalTop)/entryDistance));
+    const leaving=smooth(clamp01((naturalBottom-top)/exitDistance));
+    const focused=el.contains(document.activeElement);
+    updates.push({el,state,y:focused?0:64*(1-entering)-44*(1-leaving),opacity:focused?1:entering*leaving});
+  });
+  updates.forEach(({el,state,y,opacity})=>{state.y=y;el.style.setProperty('--scroll-y',y.toFixed(2)+'px');el.style.setProperty('--scroll-opacity',opacity.toFixed(3))});
+}
+addEventListener('scroll',queueMotion,{passive:true});addEventListener('resize',queueMotion,{passive:true});
+addEventListener('pageshow',queueMotion);document.addEventListener('focusin',queueMotion);document.addEventListener('focusout',queueMotion);
+reducedMotion.addEventListener('change',queueMotion);
+if('ResizeObserver' in window){new ResizeObserver(queueMotion).observe(document.body)}
+if(gallery)new MutationObserver(collectScenes).observe(gallery,{childList:true});
+collectScenes();
+
+// Crossfading photographs: pause off-screen, in a background tab, or for reduced motion.
+const slides=[...document.querySelectorAll('.hero-slide')],slideCounter=$('#slide-counter'),slidePause=$('#slide-pause');
+let currentSlide=0,slideTimer=null,slidesPaused=false,heroInView=true;
+function showSlide(index){currentSlide=(index+slides.length)%slides.length;slides.forEach((slide,i)=>{const active=i===currentSlide;slide.classList.toggle('is-active',active);slide.setAttribute('aria-hidden',String(!active))});if(slideCounter)slideCounter.textContent=String(currentSlide+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0')}
+function syncSlides(){clearInterval(slideTimer);slideTimer=null;if(slides.length>1&&!slidesPaused&&!reducedMotion.matches&&!document.hidden&&heroInView)slideTimer=setInterval(()=>showSlide(currentSlide+1),7500);if(slidePause){const paused=slidesPaused||reducedMotion.matches;slidePause.innerHTML=iconMarkup(paused?'play':'pause');slidePause.disabled=reducedMotion.matches;slidePause.setAttribute('aria-label',reducedMotion.matches?'Cambio automático desactivado por movimiento reducido':paused?'Reanudar cambio de fotos':'Pausar cambio de fotos');slidePause.setAttribute('aria-pressed',String(paused))}}
+if(slides.length){$('#slide-prev').addEventListener('click',()=>{showSlide(currentSlide-1);syncSlides()});$('#slide-next').addEventListener('click',()=>{showSlide(currentSlide+1);syncSlides()});slidePause.addEventListener('click',()=>{slidesPaused=!slidesPaused;syncSlides()});document.addEventListener('visibilitychange',syncSlides);reducedMotion.addEventListener('change',syncSlides);if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroInView=entries[0].isIntersecting;syncSlides()},{threshold:.05}).observe($('#inicio'));showSlide(0);syncSlides()}
