@@ -1,0 +1,298 @@
+[
+  {
+    "id": "operacion-31",
+    "type": "image",
+    "src": "assets/operaciones/operacion-31.webp",
+    "title": "Atardecer en el río",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-10",
+    "type": "image",
+    "src": "assets/operaciones/operacion-10.webp",
+    "title": "Buque en el río",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-25",
+    "type": "image",
+    "src": "assets/operaciones/operacion-25.webp",
+    "title": "Personal en el muelle",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-20",
+    "type": "image",
+    "src": "assets/operaciones/operacion-20.webp",
+    "title": "Amarre en el muelle",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-18",
+    "type": "image",
+    "src": "assets/operaciones/operacion-18.webp",
+    "title": "Navegación nocturna",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-23",
+    "type": "image",
+    "src": "assets/operaciones/operacion-23.webp",
+    "title": "Buque en navegación",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-video-01",
+    "type": "video",
+    "src": "assets/operaciones/operacion-fluvial-sin-audio.mp4",
+    "poster": "assets/operaciones/video-portada.jpg",
+    "title": "Una operación, desde adentro",
+    "description": "Registro de trabajo de Lightship. Video sin audio.",
+    "muted": true
+  },
+  {
+    "id": "operacion-16",
+    "type": "image",
+    "src": "assets/operaciones/operacion-16.webp",
+    "title": "Asistencia al buque",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-29",
+    "type": "image",
+    "src": "assets/operaciones/operacion-29.webp",
+    "title": "Remolcador en el río",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-35",
+    "type": "image",
+    "src": "assets/operaciones/operacion-35.webp",
+    "title": "Transporte de provisiones",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-24",
+    "type": "image",
+    "src": "assets/operaciones/operacion-24.webp",
+    "title": "Instalaciones portuarias",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-07",
+    "type": "image",
+    "src": "assets/operaciones/operacion-07.webp",
+    "title": "Flota en el muelle",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-01",
+    "type": "image",
+    "src": "assets/operaciones/operacion-01.webp",
+    "title": "Navegación fluvial",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-02",
+    "type": "image",
+    "src": "assets/operaciones/operacion-02.webp",
+    "title": "Asistencia junto al muelle",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-03",
+    "type": "image",
+    "src": "assets/operaciones/operacion-03.webp",
+    "title": "A bordo de nuestra embarcación",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-04",
+    "type": "image",
+    "src": "assets/operaciones/operacion-04.webp",
+    "title": "Buques en operación",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-05",
+    "type": "image",
+    "src": "assets/operaciones/operacion-05.webp",
+    "title": "Navegación con visibilidad reducida",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-06",
+    "type": "image",
+    "src": "assets/operaciones/operacion-06.webp",
+    "title": "Actividad marítima",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-08",
+    "type": "image",
+    "src": "assets/operaciones/operacion-08.webp",
+    "title": "Buque de ultramar",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-09",
+    "type": "image",
+    "src": "assets/operaciones/operacion-09.webp",
+    "title": "Operación nocturna",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-11",
+    "type": "image",
+    "src": "assets/operaciones/operacion-11.webp",
+    "title": "Servicio nocturno",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-12",
+    "type": "image",
+    "src": "assets/operaciones/operacion-12.webp",
+    "title": "Tráfico fluvial",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-13",
+    "type": "image",
+    "src": "assets/operaciones/operacion-13.webp",
+    "title": "Embarcaciones de apoyo",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-14",
+    "type": "image",
+    "src": "assets/operaciones/operacion-14.webp",
+    "title": "Buque de carga",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-15",
+    "type": "image",
+    "src": "assets/operaciones/operacion-15.webp",
+    "title": "Actividad en el río",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-17",
+    "type": "image",
+    "src": "assets/operaciones/operacion-17.webp",
+    "title": "Trabajo junto al buque",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-19",
+    "type": "image",
+    "src": "assets/operaciones/operacion-19.webp",
+    "title": "Equipo en operación",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-21",
+    "type": "image",
+    "src": "assets/operaciones/operacion-21.webp",
+    "title": "Apoyo a buques",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-22",
+    "type": "image",
+    "src": "assets/operaciones/operacion-22.webp",
+    "title": "Asistencia fluvial",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-26",
+    "type": "image",
+    "src": "assets/operaciones/operacion-26.webp",
+    "title": "Traslado en embarcación",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-27",
+    "type": "image",
+    "src": "assets/operaciones/operacion-27.webp",
+    "title": "En cubierta",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-28",
+    "type": "image",
+    "src": "assets/operaciones/operacion-28.webp",
+    "title": "Operación desde el agua",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-30",
+    "type": "image",
+    "src": "assets/operaciones/operacion-30.webp",
+    "title": "La Katepada en el muelle",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-32",
+    "type": "image",
+    "src": "assets/operaciones/operacion-32.webp",
+    "title": "LM Regina",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-33",
+    "type": "image",
+    "src": "assets/operaciones/operacion-33.webp",
+    "title": "Remolcador en operación",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "operacion-34",
+    "type": "image",
+    "src": "assets/operaciones/operacion-34.webp",
+    "title": "Buque iluminado",
+    "description": "Servicios marítimos, fluviales y portuarios de Lightship."
+  },
+  {
+    "id": "fleet",
+    "type": "image",
+    "src": "assets/fleet.webp",
+    "title": "Nuestra flota",
+    "description": "Embarcaciones Lightship en el muelle"
+  },
+  {
+    "id": "regina",
+    "type": "image",
+    "src": "assets/hero.webp",
+    "title": "LM Regina",
+    "description": "Al servicio de la operación fluvial"
+  },
+  {
+    "id": "deck",
+    "type": "image",
+    "src": "assets/deck.webp",
+    "title": "A bordo",
+    "description": "Cubierta de nuestra embarcación"
+  },
+  {
+    "id": "cabin",
+    "type": "image",
+    "src": "assets/cabin.webp",
+    "title": "Cada detalle cuenta",
+    "description": "Interior y puesto de mando"
+  },
+  {
+    "id": "katepada",
+    "type": "image",
+    "src": "assets/katepada.webp",
+    "title": "La Katepada",
+    "description": "Parte de nuestra flota"
+  },
+  {
+    "id": "front",
+    "type": "image",
+    "src": "assets/regina-front.webp",
+    "title": "Listos para navegar",
+    "description": "LM Regina en el muelle"
+  }
+]

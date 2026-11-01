@@ -1,68 +1,47 @@
-# Lightship SRL — Web y galería
+# Lightship — sitio y panel privado
 
-Sitio estático completo, sin instalación de paquetes ni paso de compilación. Incluye fotografías locales, portfolio PDF, flota, cobertura, contacto, galería, modo oscuro y claro y editor de contenido.
+## Publicación
 
-## Publicar desde GitHub y Vercel
+Repositorio: https://github.com/serviciosMyM-debug/Lightship. Vercel compila el proyecto con `npm ci` y `npm run build`; la salida estática queda en `public/` y las funciones están en `api/`. El archivo `vercel.json` configura la compilación. Para desarrollo, ejecutá `npm install`, `npm test` y `npm run build`.
 
-1. Creá o elegí un repositorio para Lightship en tu cuenta de GitHub. Evitá reemplazar archivos de otro proyecto.
-2. Subí el **contenido** de esta carpeta a la raíz del repositorio: `index.html`, los demás archivos y la carpeta `assets`. No subas solamente el ZIP ni una carpeta que los contenga.
-3. En Vercel, importá ese repositorio. Elegí el preset **Other**. Dejá Build Command sin comando, Install Command sin comando y Output Directory en la raíz (`.`). No requiere variables de entorno.
-4. Publicá y revisá el enlace que genere Vercel.
-5. En Settings → Domains, agregá el dominio confirmado y seguí los registros DNS exactos que te indique Vercel. El dominio sugerido por el cliente es `lightship.com.ar`, pendiente de confirmación. Conservá los registros MX, SPF, DKIM y DMARC del correo existente.
-6. Elegí el dominio principal y su redirección www según la configuración de Vercel.
+La página conserva una galería base local con las fotografías y el video suministrados. El video de la carpeta de noviembre se publicó sin pista de audio. Se omitió una copia idéntica de una fotografía; las demás se optimizaron para la web.
 
-Repositorio del proyecto: https://github.com/serviciosMyM-debug/Lightship. La conexión con Vercel y el dominio se verifican por separado desde la cuenta de alojamiento.
+## Acceso del cliente
 
-## Agregar imágenes y videos sin editar código
+Dirección: https://www.lightship.com.ar/admin
+Usuario: nicolas
+La contraseña se entrega por separado, en un archivo privado local. Nunca agregar credenciales al repositorio.
 
-1. Abrí `/editor.html` desde la web publicada o desde el servidor local.
-2. Cargá una imagen JPG/PNG/WebP o un video MP4/WebM. También podés pegar un enlace de YouTube o Vimeo. La portada de video es opcional.
-3. Agregá título y descripción. Podés corregir textos, eliminar elementos y cambiar el orden.
-4. Pulsá **Descargar web completa**. Se genera un ZIP que incluye el sitio y los archivos nuevos.
-5. Descomprimí el ZIP y reemplazá los archivos correspondientes en tu repositorio. Confirmá los cambios. Vercel vuelve a publicar automáticamente cuando esté conectado a la rama correcta.
+El cliente puede seleccionar varios archivos del celular, agregar un título y una descripción y publicarlos. Cada video se procesa para quitar físicamente su audio antes de mostrarse al público. También puede corregir textos, ocultar y volver a mostrar registros. Ocultar no borra archivos.
 
-El editor guarda borradores en IndexedDB en este navegador y este dispositivo. No existe un servidor de carga ni un inicio de sesión. Un visitante puede editar su propia copia local, pero no puede cambiar el repositorio o la web pública sin acceso a GitHub. No guardes información sensible en títulos o descripciones. Un cambio del navegador, su limpieza de datos o una exportación pendiente puede perder el borrador: descargá una copia como respaldo.
+Formatos: fotos JPG, PNG y WebP; videos MP4, MOV y WebM. Límite: 60 MB por archivo. Los videos cortos se procesan con mayor rapidez; una carga que no pueda completarse no se publica. El procesamiento de cada archivo tiene un tiempo máximo de ejecución. Si un video largo no termina, preparar una versión más corta. Mantener el panel abierto hasta que termine cada carga.
 
-El editor es una herramienta de preparación de archivos, no un CMS con publicación inmediata. Para publicación directa por varios administradores haría falta conectar un servicio con autenticación y almacenamiento.
+La sesión dura 8 horas. Hay un límite de intentos de acceso. La sesión se guarda en una cookie segura, inaccesible a JavaScript; el servidor verifica usuario y contraseña. El panel no permite cambios públicos sin autenticarse.
 
-Límites del editor: imágenes 15 MB, videos 40 MB por archivo. Para videos pesados usá YouTube o Vimeo. El proveedor del video puede impedir la reproducción incrustada o mostrar sus propios avisos; probá los enlaces antes de publicar. Los archivos exportados conservan su formato original: comprimí los videos para que carguen bien en celulares.
+## Almacenamiento
 
-## Vista previa local
+El proyecto necesita un almacén Vercel Blob **privado**, dedicado a Lightship. Los originales entran a `incoming/`; solamente los archivos procesados y registrados en `records/` se sirven por la API pública. Un archivo original no aparece en la galería. Al completar el procesamiento, se retira el original. Si una carga falla, el original puede quedar en el espacio privado y no se publica. Los archivos procesados están en `media/`.
 
-Podés abrir `index.html` directamente para ver la página. Para usar la exportación del editor, serví la carpeta por HTTP. Si tenés Node.js, desde la carpeta ejecutá:
+Vercel debe conectar `BLOB_READ_WRITE_TOKEN` al servidor. Los otros valores son `LIGHTSHIP_ADMIN_USER`, `LIGHTSHIP_ADMIN_PASSWORD_HASH` y `LIGHTSHIP_SESSION_SECRET`. No tienen prefijo público ni se incluyen en los archivos del navegador. El hash de la contraseña usa scrypt. La clave de sesión es aleatoria. Después de modificar las variables del servidor se necesita un nuevo despliegue para aplicarlas.
 
-```
-node preview.cjs
-```
+El panel aparece como pendiente de activación hasta tener configurados los valores necesarios. El sitio público sigue mostrando la galería local si el almacén no está disponible. Las actualizaciones del contenido pueden tardar hasta unos segundos por caché.
 
-Abrí `http://127.0.0.1:4173` y `http://127.0.0.1:4173/editor.html`. Cerrá el proceso con Ctrl+C al terminar.
+## Respaldo
 
-## Contacto y contenido
+GitHub conserva los archivos de la web y la galería base. El contenido que el cliente sube desde el panel se guarda en Blob y no genera commits de GitHub. Respaldar ese almacenamiento por separado si se requiere una copia externa.
 
-Se transcribieron los contactos y servicios del portfolio de junio proporcionado: operaciones@lightship.com.ar, administracion@lightship.com.ar, +54 9 3476 597324 y +54 9 3414 680382. Confirmá que siguen vigentes antes del lanzamiento. No se inventaron certificaciones, clientes, testimonios ni estadísticas.
+El ZIP del proyecto incluye código fuente, configuración y archivos locales. Excluye dependencias instaladas y credenciales. Para reconstruirlo se necesita ejecutar `npm install` y `npm run build`.
 
-El formulario prepara un mensaje para WhatsApp y el visitante lo envía desde allí. No envía correos ni almacena consultas. Los correos tienen enlaces `mailto:` y los teléfonos enlaces para llamar.
+## Video y privacidad
 
-Los títulos, textos y datos generales están en `index.html`. El contenido de galería está en `content.js`. Los colores y la presentación están en `styles.css`.
+El video base entregado se verificó sin ninguna pista de audio. Los futuros videos pasan por un procesamiento privado antes de publicarse: se conserva únicamente video, se convierte a MP4 compatible y se genera una portada. Un botón de silenciar por sí solo no reemplaza ese proceso.
 
-Las dimensiones y capacidades de la flota se tomaron del PDF; verificá su vigencia y las condiciones de cada servicio antes de la publicación definitiva. La fotografía de portada muestra LM Regina en el muelle. El símbolo del ancla se obtuvo del portfolio original; las fotos son del material suministrado. No se incorporaron fotografías de terceros.
+## Identidad y presentación
 
-## Indexación
+Modo oscuro inicial y selector claro/oscuro con preferencia persistente. Firma fija “Hecho por Servicios MyM”, con los logos originales locales, enlace oficial y espacio para el área segura del celular. La firma permanece visible en el acceso privado y los modales.
 
-Se incluyen título, descripción, idioma, encabezados, texto alternativo, metadatos sociales y `robots.txt`. La indexación no depende de conectar GitHub: ocurre después de publicar una web accesible a los buscadores. El editor solicita no ser indexado.
+La portada alterna fotos de la flota con controles de pausa y navegación. Los bloques aparecen y desaparecen según el desplazamiento. Los efectos respetan la preferencia de movimiento reducido.
 
-Cuando confirmes el dominio, agregá la URL absoluta de producción como enlace canónico y `og:url`, convertí `og:image` a su URL absoluta y creá un `sitemap.xml`. Luego podés enviar ese sitemap a Google Search Console. No se fijó un dominio no confirmado ni se garantiza una posición en los resultados.
+## Contacto
 
-## Preferencias y firma
-
-Oscuro de inicio, selector claro/oscuro con elección persistente. Firma fija “Hecho por Servicios MyM”, logos originales locales y enlace a serviciosmym.com.ar. El sitio reserva espacio inferior y área segura móvil. La firma permanece visible también con la galería abierta y en el editor.
-
-## Archivos
-
-`files.json` enumera los archivos necesarios para la exportación del editor. Incluye copias de los archivos de configuración y de la guía, porque algunos alojamientos no sirven esos archivos por HTTP. Si los modificás manualmente, sincronizá también sus copias en `files.json`; si agregás archivos al proyecto, agregalos a la lista `files`. La biblioteca JSZip se incluye localmente y conserva su licencia en su encabezado (MIT/GPL dual).
-
-## Movimiento y fotos de portada
-
-La portada alterna tres fotografías locales de las embarcaciones cada 7,5 segundos con transición de 1,8 segundos. Los controles permiten avanzar, retroceder y pausar. El cambio se suspende cuando la portada está fuera de pantalla o la pestaña no está visible. Con la preferencia de movimiento reducido del dispositivo, se desactiva el cambio automático y se conservan los controles manuales.
-
-Los bloques de contenido aparecen y se desvanecen según su posición al desplazarse, en ambos sentidos. Los formularios conservan su visibilidad mientras tienen el foco. La preferencia de movimiento reducido desactiva estos efectos. La cabecera fija usa un degradado transparente y la firma inferior conserva espacio reservado y área segura móvil.
+El formulario público prepara una consulta en WhatsApp; el visitante confirma su envío allí. Los contactos, los servicios y los datos de flota provienen del portfolio proporcionado. El panel de contenidos no modifica los contactos ni las dimensiones de las embarcaciones.

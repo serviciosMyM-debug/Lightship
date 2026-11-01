@@ -1,0 +1,2 @@
+const {records,mergeItems}=require('../lib/store.cjs');
+module.exports=async(req,res)=>{if(req.method!=='GET')return res.status(405).json({error:'Método no permitido.'});try{if(!process.env.BLOB_READ_WRITE_TOKEN)return res.status(200).json({fallback:true});const items=mergeItems(await records());res.setHeader('Cache-Control','public, max-age=0, s-maxage=15, stale-while-revalidate=30');return res.status(200).json({items})}catch{res.setHeader('Cache-Control','no-store');return res.status(503).json({fallback:true})}};
